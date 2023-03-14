@@ -22,3 +22,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+//app icon credit to pngtree

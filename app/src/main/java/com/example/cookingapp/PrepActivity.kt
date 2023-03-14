@@ -22,6 +22,7 @@ class PrepActivity : AppCompatActivity() {
     private var speechRecognizer: SpeechRecognizer? = null
     private var editText : EditText? = null
     private var micBtn : ImageButton? = null
+    private lateinit var myStepListView : ListView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,15 +35,15 @@ class PrepActivity : AppCompatActivity() {
         {
             checkPermissions()
         }
+        myStepListView= findViewById(R.id.stepsList)
         editText = findViewById(R.id.texts)
         micBtn = findViewById(R.id.buttons)
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
 
         //create list view and list items
         val values = mutableListOf<String>("step1","step2","step3", "step4")
-        val myListView= findViewById<ListView>(R.id.stepList)
         val adapter = ArrayAdapter<String>(this, R.layout.list_item, values)
-        myListView.adapter= adapter
+        myStepListView.adapter= adapter
 
         val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         speechRecognizerIntent.putExtra(

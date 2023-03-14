@@ -42,7 +42,7 @@ class PrepActivity : AppCompatActivity() {
 
         //create list view and list items
         val values = mutableListOf<String>("step1","step2","step3", "step4")
-        val adapter = ArrayAdapter<String>(this, R.layout.list_item, values)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values)
         myStepListView.adapter= adapter
 
         val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)

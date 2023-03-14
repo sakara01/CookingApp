@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="monospace"
-        android:text="Area(Cusine)"
+        android:text="Area(Cuisine)"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -64,7 +64,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="monospace"
                 android:text="Overview"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.102"
                 app:layout_constraintStart_toStartOf="parent"
@@ -179,13 +179,80 @@
             <ListView
                 android:id="@+id/lvIngredients"
                 android:layout_width="260dp"
-                android:layout_height="150dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="8dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
                 app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />
 
+            <TextView
+                android:id="@+id/tvAppliancesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:fontFamily="monospace"
+                android:text="Appliances"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
+                app:layout_constraintTop_toBottomOf="@+id/lvIngredients" />
+
+            <HorizontalScrollView
+                android:id="@+id/svAppliances"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/tvAppliancesText"
+                app:layout_constraintTop_toBottomOf="@+id/tvAppliancesText" >
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/appliance1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:fontFamily="monospace"
+                        android:textSize="14sp"
+                        android:text=""
+                        />
+
+                    <TextView
+                        android:id="@+id/appliance2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:fontFamily="monospace"
+                        android:textSize="14sp"
+                        android:text=""
+                        android:layout_marginLeft="30dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/appliance3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:fontFamily="monospace"
+                        android:text=""
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/appliance4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:fontFamily="monospace"
+                        android:textSize="14sp"
+                        android:text=""
+                        android:layout_marginLeft="30dp"
+                        />
+
+                </LinearLayout>
+
+
+
+            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

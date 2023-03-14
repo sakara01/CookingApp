@@ -7,20 +7,20 @@
 
 
     <TextView
-        android:id="@+id/tvIngredient"
+        android:id="@+id/tvAppliance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:letterSpacing="-0.03"
         android:text="lorem ipsum dolor"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBullet"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBullet2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivBullet"
-        app:layout_constraintTop_toTopOf="@+id/ivBullet" />
+        app:layout_constraintStart_toEndOf="@+id/ivBullet2"
+        app:layout_constraintTop_toTopOf="@+id/ivBullet2" />
 
     <ImageView
-        android:id="@+id/ivBullet"
+        android:id="@+id/ivBullet2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

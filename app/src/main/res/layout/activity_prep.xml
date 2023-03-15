@@ -7,7 +7,21 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center"
+
     tools:context=".PrepActivity">
+
+    <ImageButton
+        android:id="@+id/btnPrepBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        android:background="@android:color/transparent"
+        app:tint="?attr/redElements"
+        android:scaleY="1.3"
+        android:scaleX="1.3"
+        />
 
     <EditText
         android:id="@+id/texts"
@@ -24,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.944" />
 
     <ImageButton
         android:id="@+id/buttons"
@@ -32,8 +46,10 @@
         android:layout_height="70dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/roundedbutton"
-        android:backgroundTint="@color/cardview_dark_background"
-        android:src="@drawable/ic_v_off"
+        android:backgroundTint="?attr/cardButtonBack"
+        android:elevation="6dp"
+        android:src="@android:drawable/ic_btn_speak_now"
+        app:tint="?attr/redElements"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
@@ -43,12 +59,14 @@
         android:id="@+id/tvPrep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="monospace"
+        android:letterSpacing="-0.03"
         android:text="Preparation"
+        android:textColor="?attr/text"
         android:textSize="26sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +74,7 @@
         android:id="@+id/stepsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

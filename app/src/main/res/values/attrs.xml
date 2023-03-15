@@ -5,4 +5,6 @@
     <attr name="appBackground" format="color"/>
     <attr name="text" format="color"/>
     <attr name="cardButtonBack" format="color"/>
+    <attr name="micOnClick" format="color"/>
+
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="340dp"
     android:layout_height="24dp"
-    android:textColor="?attr/text"
+    android:background="@null"
     >
 
 
@@ -15,6 +15,7 @@
         android:fontFamily="monospace"
         android:letterSpacing="-0.03"
         android:text="lorem ipsum dolor"
+        android:textColor="?attr/text"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/ivBullet"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +26,7 @@
         android:id="@+id/ivBullet"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        app:tint="?attr/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -4,31 +4,39 @@ import android.Manifest.permission.RECORD_AUDIO
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources.Theme
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
-import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
+import com.google.android.material.color.MaterialColors
 import java.util.*
+
 
 class PrepActivity : AppCompatActivity() {
 
     private var speechRecognizer: SpeechRecognizer? = null
-    private var editText : EditText? = null
+    private var voiceInput : TextView? = null
     private var micBtn : ImageButton? = null
     private lateinit var myStepListView : ListView
+    private lateinit var btnPrepBack : ImageButton
+    private var btnClicked: Boolean =false
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Dark)
+        setTheme(R.style.Light)
         setContentView(R.layout.activity_prep)
 
         if (ContextCompat.checkSelfPermission
@@ -38,14 +46,68 @@ class PrepActivity : AppCompatActivity() {
             checkPermissions()
         }
         myStepListView= findViewById(R.id.stepsList)
-        editText = findViewById(R.id.texts)
         micBtn = findViewById(R.id.buttons)
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+        voiceInput = findViewById(R.id.tvVoice)
+        btnPrepBack = findViewById(R.id.btnPrepBack)
 
         //create list view and list items
         val values = mutableListOf<String>("step1","step2","step3", "step4")
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values)
         myStepListView.adapter= adapter
+
+
+        micBtn!!.setOnTouchListener { view, motionEvent ->
+
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                if (btnClicked == false) {
+                    val my_color = MaterialColors.getColor(micBtn!!, R.attr.micOnClick)
+                    DrawableCompat.setTint(
+                        DrawableCompat.wrap(micBtn!!.getDrawable()),
+                        my_color
+                    )
+                    //create speechrecognizer here
+                    startVoice()
+                    btnClicked = true
+                    //Log.d("myTag","btnClicked set to true")
+                } else if (btnClicked == true) {
+                    //end speech recognition and reset drawable
+                    val my_color = MaterialColors.getColor(micBtn!!, R.attr.redElements)
+                    DrawableCompat.setTint(
+                        DrawableCompat.wrap(micBtn!!.getDrawable()),
+                        my_color
+                    )
+                    speechRecognizer!!.destroy()
+                    voiceInput!!.text="voice commands off"
+                    btnClicked = false
+                    //Log.d("myTag","btnClicked set to false")
+                }
+            }
+
+            false
+        }
+
+        btnPrepBack.setOnClickListener{
+            if (btnClicked == true) {
+                speechRecognizer!!.destroy()
+            }
+            finish()
+            Animatoo.animateSlideRight(this)
+
+        }
+    }
+
+    private fun checkPermissions() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            ActivityCompat.requestPermissions(
+                this, arrayOf(RECORD_AUDIO),
+                RecordAudioRequestCode
+            )
+        }
+    }
+
+    private fun startVoice(){
+        voiceInput = findViewById(R.id.tvVoice)
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
 
         val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         speechRecognizerIntent.putExtra(
@@ -60,8 +122,7 @@ class PrepActivity : AppCompatActivity() {
             }
 
             override fun onBeginningOfSpeech() {
-                editText!!.setText("")
-                editText!!.setHint("Listening...")
+                voiceInput!!.text="Listening..."
             }
 
             override fun onRmsChanged(rmsdB: Float) {
@@ -75,7 +136,7 @@ class PrepActivity : AppCompatActivity() {
             }
 
             override fun onError(error: Int) {
-                Log.d("myTag","my message")
+                //Log.d("myTag","my message")
                 speechRecognizer!!.startListening(
                     speechRecognizerIntent
                 )
@@ -84,7 +145,7 @@ class PrepActivity : AppCompatActivity() {
             override fun onResults(bundle: Bundle?) {
                 //micBtn!!.setImageResource(R.drawable.ic_v_off)
                 val data = bundle!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                editText!!.setText(data!![0])
+                voiceInput!!.setText(data!![0])
                 if (data!![0] == "Next" || data!![0] == "next" || data!![0] == "next up" || data!![0] == "Next Step"){
                     Log.d("myTag", "next recognized")
                     // Add stuff here to move to next instruction or use function
@@ -117,31 +178,9 @@ class PrepActivity : AppCompatActivity() {
 
         })
 
-        micBtn!!.setOnTouchListener { view, motionEvent ->
-
-            if (motionEvent.action == MotionEvent.ACTION_DOWN){
-                micBtn!!.setImageResource(R.drawable.ic_v_on)
-                speechRecognizer!!.startListening(
-                    speechRecognizerIntent
-                )
-            }
-
-            false
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        speechRecognizer!!.destroy()
-    }
-
-    private fun checkPermissions() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            ActivityCompat.requestPermissions(
-                this, arrayOf(RECORD_AUDIO),
-                RecordAudioRequestCode
-            )
-        }
+        speechRecognizer!!.startListening(
+            speechRecognizerIntent
+        )
     }
 
     private fun nextStep(){

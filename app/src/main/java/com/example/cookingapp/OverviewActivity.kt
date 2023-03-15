@@ -24,7 +24,7 @@ class OverviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Dark)
+        setTheme(R.style.Light)
         setContentView(R.layout.activity_overview)
 
 

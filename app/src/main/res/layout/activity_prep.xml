@@ -13,13 +13,20 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cdTop"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        android:layout_marginTop="-50dp"
+        android:layout_height="300dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        android:layout_marginTop="-14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepsList" >
+        app:layout_constraintTop_toBottomOf="@+id/stepsList"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="?attr/prepBackground"/>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -90,10 +97,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="124dp"
-        app:cardElevation="4dp"
+        android:layout_height="140dp"
+        app:cardElevation="3dp"
         app:cardCornerRadius="10dp"
-        android:layout_marginTop="-4dp"
+        android:layout_marginTop="-32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -152,8 +159,8 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/roundedbutton"
         android:backgroundTint="?attr/cardButtonBack"
-        android:elevation="6dp"
-        android:translationZ="10dp"
+        android:elevation="2dp"
+        android:translationZ="2dp"
         android:src="@android:drawable/ic_btn_speak_now"
         app:tint="?attr/redElements"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,18 +181,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <!--
+
     <Button
         android:id="@+id/btnTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="276dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="120dp"
         android:background="?attr/appBackground"
-        android:text="test"
-        android:translationZ="20dp"
+        android:text="next"
+        android:translationZ="1000dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    -->
+
+    <Button
+        android:id="@+id/btnTest2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="180dp"
+        android:background="?attr/appBackground"
+        android:text="previous"
+        android:translationZ="1000dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,17 @@ import android.Manifest.permission.RECORD_AUDIO
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources.Theme
 import android.os.Build
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
-import android.util.TypedValue
 import android.view.MotionEvent
+import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -33,14 +32,19 @@ class PrepActivity : AppCompatActivity() {
     private lateinit var btnPrepBack : ImageButton
     private var btnClicked: Boolean =false
     private lateinit var btnTest : Button
-    private var position : Int =0
-
+    private lateinit var btnTest2 : Button
+    private var position : Int = 0
+    private var maxPosition : Int = 0
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Light)
         setContentView(R.layout.activity_prep)
+
+        //use num of instructions for max position and previous position
+        position = 0
+        maxPosition = 9
 
         if (ContextCompat.checkSelfPermission
                 (this, RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
@@ -52,7 +56,8 @@ class PrepActivity : AppCompatActivity() {
         micBtn = findViewById(R.id.buttons)
         voiceInput = findViewById(R.id.tvVoice)
         btnPrepBack = findViewById(R.id.btnPrepBack)
-        //btnTest = findViewById(R.id.btnTest)
+        btnTest = findViewById(R.id.btnTest)
+        btnTest2 = findViewById(R.id.btnTest2)
 
         createSteps()
 
@@ -95,17 +100,16 @@ class PrepActivity : AppCompatActivity() {
 
         }
 
-        /*
-        btnTest.setOnClickListener{
-            if (position == 0){
-                stepListView.smoothScrollToPositionFromTop(position, 200)
-            }
-            stepListView.smoothScrollToPositionFromTop(position, 220)
 
-            position += 1
+        btnTest.setOnClickListener{
+            nextStep()
+            position +=1
         }
 
-         */
+        btnTest2.setOnClickListener{
+            previousStep()
+            position -=1
+        }
 
     }
 
@@ -164,11 +168,13 @@ class PrepActivity : AppCompatActivity() {
                     Log.d("myTag", "next recognized")
                     // Add stuff here to move to next instruction or use function
                     nextStep()
+                    position +=1
 
                 }else if (data!![0] == "Previous" || data!![0] == "previous"){
                     Log.d("myTag", "previous recognized")
                     // Add here to move to next instruction or inside function
                     previousStep()
+                    position -=1
 
                 }else if (data!![0] == "Exit" || data!![0] == "exit" || data!![0] == "X"){
                     Log.d("myTag", "exit recognized")
@@ -206,18 +212,183 @@ class PrepActivity : AppCompatActivity() {
             "Bring to a boil and cook for 5 minutes.",
             "Remove from the heat and add the chopped basil.",
             "Drain the pasta and add it to the sauce.",
-            "Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.")
+            "Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",
+            "placeholder(important dont delete)",
+            "placeholder(important dont delete)",
+            "placeholder(important dont delete)",
+            "placeholder(important dont delete)")
         val adapter = ArrayAdapter<String>(this, R.layout.step_item, R.id.tvInstruction, values)
         stepListView.adapter= adapter
     }
 
     private fun nextStep(){
-        /// ADD stuff here to move to next instruction
-        //stepListView.smoothScrollToPosition(2)
+        //current position plus one (to move forward)
+
+        if (position ==0 ){
+            var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(0).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+
+            var myNextCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+
+            var myNextCard2: CardView = stepListView.getChildAt(2).findViewById<CardView>(R.id.stepCardView)
+            myNextCard2.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard2)
+
+        }
+        else if (position == 1){
+            stepListView.smoothScrollToPositionFromTop(position, 326)
+            var myCard: CardView = stepListView.getChildAt(position).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(position).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+            var oldCard: CardView = stepListView.getChildAt(position-1).findViewById<CardView>(R.id.stepCardView)
+            oldCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(oldCard)
+
+            var myNextCard: CardView = stepListView.getChildAt(position+1).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+
+        }
+        else if (position == 2){
+            stepListView.smoothScrollToPositionFromTop(position, 326)
+            var myCard: CardView = stepListView.getChildAt(position).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(position).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+            var oldCard: CardView = stepListView.getChildAt(position-1).findViewById<CardView>(R.id.stepCardView)
+            oldCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(oldCard)
+
+            var myNextCard: CardView = stepListView.getChildAt(position+1).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+
+        }
+        else if (position <= maxPosition){
+
+            stepListView.smoothScrollToPositionFromTop(position, 326)
+            var myCard: CardView = stepListView.getChildAt(2).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+            var oldCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
+            oldCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(oldCard)
+
+            if (position < maxPosition){
+                var myNextCard: CardView = stepListView.getChildAt(3).findViewById<CardView>(R.id.stepCardView)
+                myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+                defocusCard(myNextCard)
+            }
+
+        }
+    }
+
+    private fun focusCard(myCard : CardView) {
+        val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
+        params.width = 900
+        params.height = 400
+        myCard.layoutParams = params
+
+        var layoutCard = myCard.findViewById<LinearLayout>(R.id.layoutCard)
+        val linParams: ViewGroup.LayoutParams = layoutCard.getLayoutParams()
+        linParams.width = 800
+        linParams.height = 280
+        layoutCard.layoutParams = linParams
+
+        var instCard = myCard.findViewById<TextView>(R.id.tvInstruction)
+        instCard.setTextSize(17F)
+
+        var instText = myCard.findViewById<TextView>(R.id.tvInstructions)
+        instText.setTextSize(17F)
+    }
+
+    private fun defocusCard(myCard: CardView){
+        val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
+        params.width = 740
+        params.height = 340
+        myCard.layoutParams = params
+
+        var layoutCard = myCard.findViewById<LinearLayout>(R.id.layoutCard)
+        val linParams: ViewGroup.LayoutParams = layoutCard.getLayoutParams()
+        linParams.width = 720
+        linParams.height = 200
+        layoutCard.layoutParams = linParams
+
+        var instCard = myCard.findViewById<TextView>(R.id.tvInstruction)
+        instCard.setTextSize(14F)
+
+        var instText = myCard.findViewById<TextView>(R.id.tvInstructions)
+        instText.setTextSize(14F)
     }
 
     private fun previousStep(){
-        /// ADD stuff here to move to previous instruction
+
+        if (position ==0 ){
+            var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(0).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+
+            var myNextCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+
+            var myNextCard2: CardView = stepListView.getChildAt(2).findViewById<CardView>(R.id.stepCardView)
+            myNextCard2.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard2)
+        }
+
+        else if (position > maxPosition){
+            var myCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+            var oldCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
+            oldCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(oldCard)
+
+            var myNextCard: CardView = stepListView.getChildAt(2).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+        }
+
+        else if (position >= 0){
+            //stepListView.smoothScrollToPosition(position -1)
+            stepListView.smoothScrollBy(-450, 300)
+            var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
+            myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
+            focusCard(myCard)
+
+            //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
+            //myText.text = position.toString()
+            //var oldCard: CardView = stepListView.getChildAt(-1).findViewById<CardView>(R.id.stepCardView)
+            //oldCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            //defocusCard(oldCard)
+
+            var myNextCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
+            myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
+            defocusCard(myNextCard)
+        }
+
+
     }
 
     private fun exitRecipe(){

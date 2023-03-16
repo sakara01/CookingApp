@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="180dp"
+    android:minHeight="170dp"
     android:background="@null"
     >
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/stepCardView"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:minHeight="120dp"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="20dp"
         android:elevation="6dp"
+        app:cardBackgroundColor="?attr/prepBackground"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,26 +40,28 @@
 
 
             <LinearLayout
+                android:id="@+id/layoutCard"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="22dp"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvInstructions"
-                android:paddingBottom="30dp">
+                app:layout_constraintTop_toBottomOf="@id/tvInstructions">
 
 
                 <TextView
                     android:id="@+id/tvInstruction"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="monospace"
-                    android:text="Add lorem to ipsum and stir occasionally for 10 minutes."
-                    android:textColor="?attr/redElements"
-                    android:textAlignment="center"
                     android:letterSpacing="-0.03"
-                    />
+                    android:text="Add lorem to ipsum and stir occasionally for 10 minutes."
+                    android:textAlignment="center"
+                    android:textColor="?attr/redElements" />
 
 
             </LinearLayout>

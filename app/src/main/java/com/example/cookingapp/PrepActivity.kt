@@ -29,9 +29,12 @@ class PrepActivity : AppCompatActivity() {
     private var speechRecognizer: SpeechRecognizer? = null
     private var voiceInput : TextView? = null
     private var micBtn : ImageButton? = null
-    private lateinit var myStepListView : ListView
+    private lateinit var stepListView : ListView
     private lateinit var btnPrepBack : ImageButton
     private var btnClicked: Boolean =false
+    private lateinit var btnTest : Button
+    private var position : Int =0
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,16 +48,13 @@ class PrepActivity : AppCompatActivity() {
         {
             checkPermissions()
         }
-        myStepListView= findViewById(R.id.stepsList)
+
         micBtn = findViewById(R.id.buttons)
         voiceInput = findViewById(R.id.tvVoice)
         btnPrepBack = findViewById(R.id.btnPrepBack)
+        //btnTest = findViewById(R.id.btnTest)
 
-        //create list view and list items
-        val values = mutableListOf<String>("step1","step2","step3", "step4")
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values)
-        myStepListView.adapter= adapter
-
+        createSteps()
 
         micBtn!!.setOnTouchListener { view, motionEvent ->
 
@@ -94,7 +94,21 @@ class PrepActivity : AppCompatActivity() {
             Animatoo.animateSlideRight(this)
 
         }
+
+        /*
+        btnTest.setOnClickListener{
+            if (position == 0){
+                stepListView.smoothScrollToPositionFromTop(position, 200)
+            }
+            stepListView.smoothScrollToPositionFromTop(position, 220)
+
+            position += 1
+        }
+
+         */
+
     }
+
 
     private fun checkPermissions() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -183,8 +197,23 @@ class PrepActivity : AppCompatActivity() {
         )
     }
 
+    private fun createSteps() {
+        stepListView= findViewById(R.id.stepsList)
+        //create list view and list items
+        val values = mutableListOf<String>(
+            "Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes.",
+            "Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste.",
+            "Bring to a boil and cook for 5 minutes.",
+            "Remove from the heat and add the chopped basil.",
+            "Drain the pasta and add it to the sauce.",
+            "Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.")
+        val adapter = ArrayAdapter<String>(this, R.layout.step_item, R.id.tvInstruction, values)
+        stepListView.adapter= adapter
+    }
+
     private fun nextStep(){
         /// ADD stuff here to move to next instruction
+        //stepListView.smoothScrollToPosition(2)
     }
 
     private fun previousStep(){

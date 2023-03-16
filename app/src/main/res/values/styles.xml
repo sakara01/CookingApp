@@ -4,6 +4,7 @@
         <item name="redElements">#8F0101</item>
         <item name="buttonBackground">#FFFFFF</item>
         <item name="appBackground">#FFFFFF</item>
+        <item name="prepBackground">#FFFFFF</item>
         <item name="text">#292929</item>
         <item name="cardButtonBack">#F8F8F8</item>
         <item name="micOnClick">#098100</item>
@@ -13,6 +14,7 @@
         <item name="redElements">#EA4B4B</item>
         <item name="buttonBackground">#636363</item>
         <item name="appBackground">#2B2A2A</item>
+        <item name="prepBackground">#252525</item>
         <item name="text">#E8E8E8</item>
         <item name="cardButtonBack">#333333</item>
         <item name="micOnClick">#58ED8A</item>

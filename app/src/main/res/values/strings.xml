@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CookingApp</string>
+    <string name="api_key">d5df5da54c50419e9fe2612d548d0bc9</string>
+
 </resources>

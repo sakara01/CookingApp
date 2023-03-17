@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
+import android.speech.RecognizerIntent.EXTRA_RESULTS
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.MotionEvent
@@ -31,8 +32,8 @@ class PrepActivity : AppCompatActivity() {
     private lateinit var stepListView : ListView
     private lateinit var btnPrepBack : ImageButton
     private var btnClicked: Boolean =false
-    private lateinit var btnTest : Button
-    private lateinit var btnTest2 : Button
+    //private lateinit var btnTest : Button      no longer needed, just for testing
+    //private lateinit var btnTest2 : Button
     private var position : Int = 0
     private var maxPosition : Int = 0
 
@@ -56,8 +57,8 @@ class PrepActivity : AppCompatActivity() {
         micBtn = findViewById(R.id.buttons)
         voiceInput = findViewById(R.id.tvVoice)
         btnPrepBack = findViewById(R.id.btnPrepBack)
-        btnTest = findViewById(R.id.btnTest)
-        btnTest2 = findViewById(R.id.btnTest2)
+        //btnTest = findViewById(R.id.btnTest)       no longer needed, just for testing
+        //btnTest2 = findViewById(R.id.btnTest2)
 
         createSteps()
 
@@ -100,7 +101,7 @@ class PrepActivity : AppCompatActivity() {
 
         }
 
-
+        /*
         btnTest.setOnClickListener{
             nextStep()
             position +=1
@@ -110,6 +111,7 @@ class PrepActivity : AppCompatActivity() {
             previousStep()
             position -=1
         }
+        */
 
     }
 
@@ -164,19 +166,19 @@ class PrepActivity : AppCompatActivity() {
                 //micBtn!!.setImageResource(R.drawable.ic_v_off)
                 val data = bundle!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 voiceInput!!.setText(data!![0])
-                if (data!![0] == "Next" || data!![0] == "next" || data!![0] == "next up" || data!![0] == "Next Step"){
+                if ( "next" in data!![0]  || "Next" in data!![0]){
                     Log.d("myTag", "next recognized")
                     // Add stuff here to move to next instruction or use function
                     nextStep()
                     position +=1
 
-                }else if (data!![0] == "Previous" || data!![0] == "previous"){
+                }else if ( "previous" in data!![0] || "Previous" in data!![0]){
                     Log.d("myTag", "previous recognized")
                     // Add here to move to next instruction or inside function
                     previousStep()
                     position -=1
 
-                }else if (data!![0] == "Exit" || data!![0] == "exit" || data!![0] == "X"){
+                }else if ("exit" in data!![0] || "Exit" in data!![0] || "X" in data!![0]){
                     Log.d("myTag", "exit recognized")
                     //Add here to exit recipe or inside function
                     exitRecipe()

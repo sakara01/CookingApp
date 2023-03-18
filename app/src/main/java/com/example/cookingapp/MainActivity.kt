@@ -1,15 +1,26 @@
 package com.example.cookingapp
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
+import com.example.cookingapp.Adapters.RandomRecipeAdapter
+import com.example.cookingapp.Listeners.RandomRecipeResponseListener
+import com.example.cookingapp.Models.RandomRecipesApiResponse
 import com.google.android.material.color.MaterialColors
 
 class MainActivity : AppCompatActivity() {
+    lateinit var dialog: ProgressDialog
+    lateinit var manager: RequestManager
+    lateinit var randomRecipeAdapter: RandomRecipeAdapter
+    lateinit var recyclerView: RecyclerView
+
     private lateinit var btnPrep: Button
     private lateinit var btnOverview: Button
     private lateinit var btnTheme: Button
@@ -23,8 +34,31 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Light)
         setContentView(R.layout.activity_main)
 
+        dialog = ProgressDialog(this).apply {
+            setTitle("Loading...")
+        }
+
+        manager = RequestManager(this)
+        manager.getRandomRecipes(randomRecipeResponseListener)
+        //dialog.show()
+        //for some reason, the dialog always displays and the user cannot interact with the app
+
         //put anything that should be in onCreate in main
         main()
+    }
+
+    private val randomRecipeResponseListener = object : RandomRecipeResponseListener {
+        override fun didFetch(response: RandomRecipesApiResponse, message: String) {
+            recyclerView = findViewById(R.id.recycler_random)
+            recyclerView.setHasFixedSize(true)
+            recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 1)
+            randomRecipeAdapter = RandomRecipeAdapter(this@MainActivity, response.recipes)
+            recyclerView.adapter = randomRecipeAdapter
+        }
+
+        override fun didError(message: String) {
+            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun main(){

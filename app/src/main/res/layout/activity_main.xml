@@ -11,12 +11,11 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="serif-monospace"
-        android:letterSpacing="-0.07"
-        android:text="Hello User"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Hello"
         android:textColor="?attr/text"
-        android:textFontWeight="600"
+        android:textFontWeight="400"
         android:textSize="29sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.066"
@@ -24,14 +23,45 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="John Doe"
+        android:textColor="?attr/text"
+        android:textFontWeight="600"
+        android:textSize="29sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Recipes"
+        android:textColor="?attr/text"
+        android:textFontWeight="600"
+        android:textSize="29sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svRecipes" />
+
+    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="monospace"
-        android:textColor="?attr/redElements"
-        android:textSize="12sp"
+        android:fontFamily="@font/inter_regular"
         android:text="What will today's recipe be?"
+        android:textColor="#E75840"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -39,7 +69,7 @@
         android:id="@+id/svRecipes"
         android:layout_width="360dp"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -54,30 +84,30 @@
                 android:id="@+id/tvFeatured"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="monospace"
+                android:fontFamily="@font/inter_regular"
                 android:text="Featured"
                 android:textColor="?attr/text"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvPopular"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="56dp"
-                android:fontFamily="monospace"
+                android:layout_marginLeft="30dp"
+                android:fontFamily="@font/inter_regular"
                 android:text="Popular"
                 android:textColor="?attr/text"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvRecommended"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="56dp"
-                android:fontFamily="monospace"
+                android:layout_marginLeft="30sp"
+                android:fontFamily="@font/inter_regular"
                 android:text="Recommended For You"
                 android:textColor="?attr/text"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -113,10 +143,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:text="Theme Placeholder"
-        android:textSize="12sp"
         android:backgroundTint="?attr/cardButtonBack"
+        android:fontFamily="@font/inter_regular"
+        android:text="Theme Placeholder"
         android:textColor="?attr/text"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/btnOverview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -124,13 +155,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_random"
-        android:layout_margin="4dp"
         android:layout_width="409dp"
-        android:layout_height="414dp"
+        android:layout_height="400dp"
+        android:layout_margin="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svRecipes" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

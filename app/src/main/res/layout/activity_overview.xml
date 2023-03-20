@@ -24,7 +24,7 @@
         app:tint="?attr/text" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/recipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -46,9 +46,9 @@
         android:text="Author"
         android:textColor="#222222"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/recipeTitle"
+        app:layout_constraintStart_toStartOf="@+id/recipeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="340dp"
@@ -203,8 +203,8 @@
 
             <ListView
                 android:id="@+id/lvIngredients"
-                android:layout_width="250dp"
-                android:layout_height="140dp"
+                android:layout_width="251dp"
+                android:layout_height="177dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="12dp"
                 android:divider="@null"
@@ -217,7 +217,6 @@
                 android:id="@+id/tvAppliancesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:drawableLeft="@drawable/outline_microwave_24"
                 android:fontFamily="@font/inter_regular"
                 android:text="Appliances"
@@ -226,7 +225,14 @@
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
                 app:layout_constraintTop_toBottomOf="@+id/lvIngredients" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_recipe_appliances"
+                android:layout_width="294dp"
+                android:layout_height="63dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAppliancesText" />
+            <!--<HorizontalScrollView
                 android:id="@+id/svAppliances"
                 android:layout_width="260dp"
                 android:layout_height="30dp"
@@ -279,7 +285,7 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
-            </HorizontalScrollView>
+            </HorizontalScrollView>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

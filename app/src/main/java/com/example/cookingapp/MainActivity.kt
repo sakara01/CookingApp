@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.cookingapp.Adapters.RandomRecipeAdapter
 import com.example.cookingapp.Listeners.RandomRecipeResponseListener
+import com.example.cookingapp.Listeners.RecipeClickListener
 import com.example.cookingapp.Models.RandomRecipesApiResponse
 import com.google.android.material.color.MaterialColors
 
@@ -71,12 +72,19 @@ class MainActivity : AppCompatActivity() {
             recyclerView = findViewById(R.id.recycler_random)
             recyclerView.setHasFixedSize(true)
             recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 1)
-            randomRecipeAdapter = RandomRecipeAdapter(this@MainActivity, response.recipes)
+            randomRecipeAdapter = RandomRecipeAdapter(this@MainActivity, response.recipes, recipeClickListener)
             recyclerView.adapter = randomRecipeAdapter
         }
 
         override fun didError(message: String) {
             Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val recipeClickListener = object : RecipeClickListener {
+        override fun onRecipeClicked(id: String) {
+            startActivity(Intent(this@MainActivity, OverviewActivity::class.java)
+                .putExtra("id", id))
         }
     }
 

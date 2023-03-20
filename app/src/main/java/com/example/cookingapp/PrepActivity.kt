@@ -394,7 +394,12 @@ class PrepActivity : AppCompatActivity() {
     }
 
     private fun exitRecipe(){
-        /// ADD stuff here to exit recipe
+        if (btnClicked == true) {
+            speechRecognizer!!.destroy()
+        }
+        finish()
+        Animatoo.animateSlideRight(this)
+
     }
 
     override fun onRequestPermissionsResult(

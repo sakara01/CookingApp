@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvPopular : TextView
     private lateinit var tvRecommended : TextView
 
+    val tags: MutableList<String> = ArrayList()
+    lateinit var searchView: SearchView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Light)
@@ -37,6 +41,21 @@ class MainActivity : AppCompatActivity() {
         dialog = ProgressDialog(this).apply {
             setTitle("Loading...")
         }
+
+        searchView = findViewById(R.id.searchView_home)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                tags.clear()
+                tags.add(query)
+                manager.getRandomRecipes(randomRecipeResponseListener, tags)
+                //dialog.show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
 
         manager = RequestManager(this)
         manager.getRandomRecipes(randomRecipeResponseListener)

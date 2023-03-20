@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.cookingapp.Listeners.RandomRecipeResponseListener;
 import com.example.cookingapp.Models.RandomRecipesApiResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +48,34 @@ public class RequestManager {
         });
     }
 
+    public void getRandomRecipes(RandomRecipeResponseListener listener, List<String> tags){
+        CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
+        Call<RandomRecipesApiResponse> call = callRandomRecipes.callRandomRecipe(context.getString(R.string.api_key), "10", tags);
+        call.enqueue(new Callback<RandomRecipesApiResponse>() {
+            @Override
+            public void onResponse(Call<RandomRecipesApiResponse> call, Response<RandomRecipesApiResponse> response) {
+                if (!response.isSuccessful()) {
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RandomRecipesApiResponse> call, Throwable t) {
+                listener.didError(t.getMessage());
+
+            }
+        });
+    }
     private interface CallRandomRecipes{
+        @GET("recipes/random")
+        Call<RandomRecipesApiResponse> callRandomRecipe (
+                @Query("apiKey") String apiKey,
+                @Query("number") String number,
+                @Query("tags") List<String> tags
+        );
+
         @GET("recipes/random")
         Call<RandomRecipesApiResponse> callRandomRecipe (
                 @Query("apiKey") String apiKey,

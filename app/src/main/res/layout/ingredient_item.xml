@@ -12,24 +12,15 @@
         android:id="@+id/tvIngredient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/inter_regular"
         android:letterSpacing="-0.03"
         android:text="lorem ipsum dolor"
         android:textColor="?attr/text"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBullet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivBullet"
-        app:layout_constraintTop_toTopOf="@+id/ivBullet" />
-
-    <ImageView
-        android:id="@+id/ivBullet"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:tint="?attr/text"
+        android:drawableLeft="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_send" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

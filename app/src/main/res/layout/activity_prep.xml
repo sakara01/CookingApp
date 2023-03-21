@@ -36,11 +36,11 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_regular"
                 android:text="Ingredients"
-                android:fontFamily="monospace"
                 android:textAlignment="center"
-                android:textSize="16sp"
                 android:textColor="?attr/text"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,37 +56,35 @@
                 <TextView
                     android:id="@+id/tvIngredient1"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="3 lorem ipsum"
-                    android:textColor="?attr/redElements"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    />
+                    android:text="3 lorem ipsum"
+                    android:textAlignment="center"
+                    android:textColor="?attr/redElements" />
+
                 <TextView
                     android:id="@+id/tvIngredient2"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="1/4 cup dolor"
-                    android:textColor="?attr/redElements"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    />
+                    android:text="1/4 cup dolor"
+                    android:textAlignment="center"
+                    android:textColor="?attr/redElements" />
 
                 <TextView
                     android:id="@+id/tvIngredient3"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="2/3 tsp amet"
-                    android:textColor="?attr/redElements"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    />
+                    android:text="2/3 tsp amet"
+                    android:textAlignment="center"
+                    android:textColor="?attr/redElements" />
 
 
             </LinearLayout>
@@ -118,39 +116,37 @@
             app:srcCompat="?attr/actionModeCloseDrawable"
             app:tint="?attr/redElements" />
 
-        <TextView
-            android:id="@+id/tvPrep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="serif-monospace"
-            android:letterSpacing="-0.07"
-            android:text="Preparation"
-            android:textColor="?attr/text"
-            android:textFontWeight="600"
-            android:textSize="26sp"
-            android:translationZ="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.129"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvPrep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Preparation"
+        android:textColor="?attr/text"
+        android:textFontWeight="600"
+        android:textSize="26sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvVoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@null"
+        android:fontFamily="@font/inter_regular"
+        android:text="voice"
         android:textAlignment="center"
         android:textColor="?attr/text"
-        android:fontFamily="monospace"
-        android:text="voice"
         android:textSize="12sp"
         android:translationZ="10dp"
-        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/buttons"

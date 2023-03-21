@@ -10,18 +10,27 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.TextClock
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
+import com.example.cookingapp.Adapters.AppliancesAdapter
 import com.example.cookingapp.Listeners.RecipeDetailsListener
 import com.example.cookingapp.Models.RecipeDetailsResponse
 import org.w3c.dom.Text
 
 class OverviewActivity : AppCompatActivity() {
     var id: Int = 0
-    /*lateinit var recipeTitle : TextView
-    lateinit var recycler_recipe_appliances: RecyclerView
-    lateinit var manager : RequestManager*/
+    lateinit var recipeTitle : TextView
+    lateinit var author : TextView
+    lateinit var tvTime : TextView
+    lateinit var tvServings : TextView
+    lateinit var tvIngredientCount : TextView
+    lateinit var recycler_recipe_ingredients : RecyclerView
+    // lateinit var recycler_recipe_appliances: RecyclerView
+    lateinit var manager : RequestManager
+    //lateinit var appliancesAdapter: AppliancesAdapter
 
     private lateinit var ingredientListView : ListView
     private var arrayAdapter: ArrayAdapter<String> ?=null
@@ -40,17 +49,18 @@ class OverviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Light)
         setContentView(R.layout.activity_overview)
+        findViews()
 
         id = getIntent().getStringExtra("id")?.toIntOrNull() ?: 0
-        /*manager = RequestManager(this)
-        manager.getRecipeDetails(recipeDetailsListener, id)*/
+        manager = RequestManager(this)
+        manager.getRecipeDetails(recipeDetailsListener, id)
 
         btnOverview = findViewById(R.id.btnOverview)
         btnOverviewBack = findViewById(R.id.btnOverviewBack)
         btnHeart = findViewById(R.id.btnHeart)
         btnIngredientsPlus = findViewById(R.id.btnIngredientsPlus)
         btnIngredientsMinus = findViewById(R.id.btnIngredientsMinus)
-        servings = findViewById<TextView>(R.id.tvServings)
+        /*servings = findViewById<TextView>(R.id.tvServings)
         time = findViewById<TextView>(R.id.tvTime)
         numIng = findViewById<TextView>(R.id.tvIngredients)
 
@@ -58,7 +68,6 @@ class OverviewActivity : AppCompatActivity() {
         arrayAdapter = ArrayAdapter(this, R.layout.ingredient_item,R.id.tvIngredient ,ingredients)
         ingredientListView.adapter = arrayAdapter
 
-        //findViews()
 
         //when api response received, add ingredients like this
         ingredients.add("Consectetur adipiscing elit")
@@ -71,7 +80,7 @@ class OverviewActivity : AppCompatActivity() {
         //when api response received, update serving, time, and num of ingredients like this
         servings.text = "1"
         time.text = "2 min"
-        numIng.text = "4"
+        numIng.text = "4"*/
 
         btnOverview.setOnClickListener{
             val intent = Intent(this,PrepActivity::class.java)
@@ -104,26 +113,40 @@ class OverviewActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun findViews() {
-       recycler_recipe_appliances = findViewById(R.id.recycler_recipe_appliances)
-       recipeTitle = findViewById(R.id.recipeTitle)
+    private fun findViews() {
+        recipeTitle = findViewById(R.id.recipeTitle)
+        author = findViewById(R.id.author)
+        tvTime = findViewById(R.id.tvTime)
+        tvServings = findViewById(R.id.tvServings)
+        tvIngredientCount = findViewById(R.id.tvIngredientCount)
+        recycler_recipe_ingredients = findViewById(R.id.recycler_recipe_ingredients)
+        //recycler_recipe_appliances = findViewById(R.id.recycler_recipe_appliances)
    }
 
    private val recipeDetailsListener = object : RecipeDetailsListener {
        override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
            if (response != null) {
                recipeTitle.text = response.title
-               servingsCounter = response.servings
-               servings.text = response.servings.toString()
-               time.text = response.readyInMinutes.toString()
-               //numIng = response.extendedIngredients.size.toString()
+               author.text = response.sourceName
+               tvTime.text = response.readyInMinutes.toString()
+               tvServings.text = response.servings.toString()
+               tvIngredientCount.text = response.extendedIngredients.size.toString()
+
+               //recycler_recipe_appliances.setHasFixedSize(true)
+               //recycler_recipe_appliances.layoutManager = LinearLayoutManager(this@OverviewActivity, LinearLayoutManager.HORIZONTAL, false)
+               //appliancesAdapter = AppliancesAdapter(this@OverviewActivity, response.extendedIngredients)
+               //recycler_recipe_appliances.adapter = appliancesAdapter
            }
            else {
                recipeTitle.text = ""
-               servings.text = ""
+               author.text = ""
+               tvTime.text = ""
+               tvServings.text = ""
+               tvIngredientCount.text = ""
            }
        }
        override fun didError(message: String?) {
+           Toast.makeText(this@OverviewActivity, message, Toast.LENGTH_SHORT).show()
        }
-   }*/
+   }
 }

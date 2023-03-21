@@ -12,10 +12,12 @@
         android:id="@+id/imageView"
         android:layout_width="109dp"
         android:layout_height="106dp"
-        android:layout_marginTop="60dp"
-        android:background="#ababab"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="601dp"
+        android:background="#FFFFFF"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +32,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_regular"
         android:text="Recipe Title"
+        android:textAlignment="center"
         android:textColor="?attr/text"
         android:textSize="29sp"
         android:textStyle="bold"
@@ -38,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -58,7 +61,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnOverview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/author">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -162,7 +165,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvServingsText" />
 
             <TextView
-                android:id="@+id/tvIngredients"
+                android:id="@+id/tvIngredientCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="46dp"
@@ -201,7 +204,7 @@
                 app:srcCompat="@android:drawable/bottom_bar"
                 app:tint="#E75840" />
 
-            <ListView
+            <!--<ListView
                 android:id="@+id/lvIngredients"
                 android:layout_width="251dp"
                 android:layout_height="177dp"
@@ -211,19 +214,31 @@
                 android:dividerHeight="0dp"
                 android:fontFamily="@font/inter_regular"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
+                app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_recipe_ingredients"
+                android:layout_width="258dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
                 app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />
 
             <TextView
                 android:id="@+id/tvAppliancesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:drawableLeft="@drawable/outline_microwave_24"
                 android:fontFamily="@font/inter_regular"
                 android:text="Appliances"
                 android:textColor="?attr/text"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
-                app:layout_constraintTop_toBottomOf="@+id/lvIngredients" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_recipe_ingredients" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_recipe_appliances"

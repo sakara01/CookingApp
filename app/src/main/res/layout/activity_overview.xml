@@ -17,7 +17,6 @@
         android:background="#FFFFFF"
         android:scaleX="1.4"
         android:scaleY="1.4"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +28,7 @@
         android:id="@+id/recipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/inter_regular"
         android:text="Recipe Title"
         android:textAlignment="center"
@@ -42,13 +41,12 @@
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_width="47dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_regular"
         android:text="Author"
         android:textColor="#222222"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/recipeTitle"
         app:layout_constraintStart_toStartOf="@+id/recipeTitle"
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
@@ -89,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="44dp"
                 android:fontFamily="@font/inter_regular"
-                android:text="metric"
+                android:text="us"
                 android:textColor="#E75840"
                 android:textFontWeight="600"
                 android:textSize="18sp"
@@ -204,19 +202,19 @@
                 app:srcCompat="@android:drawable/bottom_bar"
                 app:tint="#E75840" />
 
-            <!--<ListView
+            <ListView
                 android:id="@+id/lvIngredients"
-                android:layout_width="251dp"
-                android:layout_height="177dp"
+                android:layout_width="258dp"
+                android:layout_height="156dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="12dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
                 android:fontFamily="@font/inter_regular"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
-                app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />-->
+                app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_recipe_ingredients"
                 android:layout_width="258dp"
                 android:layout_height="156dp"
@@ -225,7 +223,7 @@
                 android:divider="@null"
                 android:dividerHeight="0dp"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
-                app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />
+                app:layout_constraintTop_toBottomOf="@+id/tvIngredientsText" />-->
 
             <TextView
                 android:id="@+id/tvAppliancesText"
@@ -238,7 +236,7 @@
                 android:textColor="?attr/text"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/tvIngredientsText"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_recipe_ingredients" />
+                app:layout_constraintTop_toBottomOf="@+id/lvIngredients" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_recipe_appliances"

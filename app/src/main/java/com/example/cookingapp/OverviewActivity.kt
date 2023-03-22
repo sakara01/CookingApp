@@ -33,8 +33,9 @@ class OverviewActivity : AppCompatActivity() {
     //lateinit var appliancesAdapter: AppliancesAdapter
 
     private lateinit var ingredientListView : ListView
+    val ingredients: MutableList<String> = ArrayList()
     private var arrayAdapter: ArrayAdapter<String> ?=null
-    private var ingredients = mutableListOf<String>("lorem ipsum","dolor sit amet")
+
     private lateinit var btnOverview : ImageButton
     private lateinit var btnOverviewBack : ImageButton
     private lateinit var btnHeart : ImageButton
@@ -119,7 +120,8 @@ class OverviewActivity : AppCompatActivity() {
         tvTime = findViewById(R.id.tvTime)
         tvServings = findViewById(R.id.tvServings)
         tvIngredientCount = findViewById(R.id.tvIngredientCount)
-        recycler_recipe_ingredients = findViewById(R.id.recycler_recipe_ingredients)
+        ingredientListView = findViewById(R.id.lvIngredients)
+        //recycler_recipe_ingredients = findViewById(R.id.recycler_recipe_ingredients)
         //recycler_recipe_appliances = findViewById(R.id.recycler_recipe_appliances)
    }
 
@@ -131,6 +133,13 @@ class OverviewActivity : AppCompatActivity() {
                tvTime.text = response.readyInMinutes.toString()
                tvServings.text = response.servings.toString()
                tvIngredientCount.text = response.extendedIngredients.size.toString()
+
+               ingredients.clear()
+               for (i in 0 until response.extendedIngredients.size) {
+                   ingredients.add(response.extendedIngredients[i].original)
+               }
+               arrayAdapter = ArrayAdapter(this@OverviewActivity, R.layout.ingredient_item,R.id.tvIngredient ,ingredients)
+               ingredientListView.adapter = arrayAdapter
 
                //recycler_recipe_appliances.setHasFixedSize(true)
                //recycler_recipe_appliances.layoutManager = LinearLayoutManager(this@OverviewActivity, LinearLayoutManager.HORIZONTAL, false)

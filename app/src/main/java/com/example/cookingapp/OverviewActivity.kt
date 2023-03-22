@@ -103,13 +103,11 @@ class OverviewActivity : AppCompatActivity() {
 
         //increment servings
         btnIngredientsPlus.setOnClickListener{
-            servingsCounter += 1
-            servings.text= servingsCounter.toString()
+            tvServings.text = (Integer.parseInt(tvServings.text.toString()) + 1).toString()
         }
         btnIngredientsMinus.setOnClickListener{
-            if (servingsCounter > 0) {
-                servingsCounter -= 1
-                servings.text = servingsCounter.toString()
+            if (Integer.parseInt(tvServings.text.toString()) > 0) {
+                tvServings.text = (Integer.parseInt(tvServings.text.toString()) - 1).toString()
             }
         }
     }

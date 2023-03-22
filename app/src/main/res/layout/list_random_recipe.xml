@@ -40,7 +40,7 @@
                 android:text="Recipe"
                 android:textColor="@color/red"
                 android:textFontWeight="600"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                         android:padding="8dp"
                         android:text="Serving"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -86,7 +86,7 @@
                         android:padding="8dp"
                         android:text="Time"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

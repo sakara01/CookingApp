@@ -3,11 +3,13 @@ package com.example.cookingapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.TextClock
@@ -19,6 +21,7 @@ import com.example.cookingapp.Adapters.AppliancesAdapter
 import com.example.cookingapp.Listeners.RecipeDetailsListener
 import com.example.cookingapp.Models.RecipeDetailsResponse
 import org.w3c.dom.Text
+import com.squareup.picasso.Picasso;
 
 class OverviewActivity : AppCompatActivity() {
     var id: Int = 0
@@ -27,6 +30,7 @@ class OverviewActivity : AppCompatActivity() {
     lateinit var tvTime : TextView
     lateinit var tvServings : TextView
     lateinit var tvIngredientCount : TextView
+    lateinit var recipeImage : ImageView
     lateinit var recycler_recipe_ingredients : RecyclerView
     // lateinit var recycler_recipe_appliances: RecyclerView
     lateinit var manager : RequestManager
@@ -119,6 +123,8 @@ class OverviewActivity : AppCompatActivity() {
         tvServings = findViewById(R.id.tvServings)
         tvIngredientCount = findViewById(R.id.tvIngredientCount)
         ingredientListView = findViewById(R.id.lvIngredients)
+        recipeImage = findViewById(R.id.imageView_food)
+
         //recycler_recipe_ingredients = findViewById(R.id.recycler_recipe_ingredients)
         //recycler_recipe_appliances = findViewById(R.id.recycler_recipe_appliances)
    }
@@ -131,6 +137,8 @@ class OverviewActivity : AppCompatActivity() {
                tvTime.text = response.readyInMinutes.toString()
                tvServings.text = response.servings.toString()
                tvIngredientCount.text = response.extendedIngredients.size.toString()
+               Log.d("Image URL", response.image);
+               Picasso.get().load(response.image).into(recipeImage)
 
                ingredients.clear()
                for (i in 0 until response.extendedIngredients.size) {

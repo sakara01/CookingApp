@@ -8,21 +8,15 @@
     tools:context=".OverviewActivity">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView"
+    <ImageView
+        android:id="@+id/imageView_food"
         android:layout_width="109dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="601dp"
-        android:background="#FFFFFF"
-        android:scaleX="1.4"
-        android:scaleY="1.4"
+        android:layout_height="109dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
-        app:tint="?attr/text" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recipeTitle"
@@ -33,20 +27,21 @@
         android:text="Recipe Title"
         android:textAlignment="center"
         android:textColor="?attr/text"
-        android:textSize="29sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_food" />
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="47dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_regular"
         android:text="Author"
         android:textColor="#222222"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/recipeTitle"
         app:layout_constraintStart_toStartOf="@+id/recipeTitle"
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
@@ -205,7 +200,7 @@
             <ListView
                 android:id="@+id/lvIngredients"
                 android:layout_width="258dp"
-                android:layout_height="156dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="12dp"
                 android:divider="@null"
@@ -241,7 +236,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_recipe_appliances"
                 android:layout_width="294dp"
-                android:layout_height="63dp"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvAppliancesText" />

@@ -89,41 +89,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun main(){
-        btnPrep = findViewById(R.id.btnPrep)
-        btnOverview = findViewById(R.id.btnOverview)
-        btnTheme = findViewById(R.id.btnTheme)
         tvFeatured = findViewById(R.id.tvFeatured)
         tvPopular = findViewById(R.id.tvPopular)
         tvRecommended = findViewById(R.id.tvRecommended)
-
-        btnPrep.setOnClickListener{
-            val intent = Intent(this,PrepActivity::class.java)
-            //this is the current activity, and SecondActivity is the one we want to navigate to
-            startActivity(intent)
-            Animatoo.animateSlideLeft(this)
-        }
-
-        btnOverview.setOnClickListener{
-            val intent = Intent(this,OverviewActivity::class.java)
-            //this is the current activity, and SecondActivity is the one we want to navigate to
-            startActivity(intent)
-            Animatoo.animateSlideLeft(this)
-        }
-
-        btnTheme.setOnClickListener{
-            if (currentTheme == 0){
-                setTheme(R.style.Dark)
-                setContentView(R.layout.activity_main)
-                main()
-                currentTheme = 1
-            }
-            else {
-                setTheme(R.style.Light)
-                setContentView(R.layout.activity_main)
-                main()
-                currentTheme = 0
-            }
-        }
 
         tvFeatured.setOnClickListener{
             val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)

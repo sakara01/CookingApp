@@ -22,6 +22,7 @@ import com.example.cookingapp.Listeners.RecipeDetailsListener
 import com.example.cookingapp.Models.RecipeDetailsResponse
 import org.w3c.dom.Text
 import com.squareup.picasso.Picasso;
+import com.example.cookingapp.CircleTransform
 
 class OverviewActivity : AppCompatActivity() {
     var id: Int = 0
@@ -138,7 +139,10 @@ class OverviewActivity : AppCompatActivity() {
                tvServings.text = response.servings.toString()
                tvIngredientCount.text = response.extendedIngredients.size.toString()
                Log.d("Image URL", response.image);
-               Picasso.get().load(response.image).into(recipeImage)
+               Picasso.get().load(response.image)
+                   .placeholder(R.drawable.circle)
+                   .transform(CircleTransform())
+                   .into(recipeImage)
 
                ingredients.clear()
                for (i in 0 until response.extendedIngredients.size) {

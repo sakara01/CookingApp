@@ -89,31 +89,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun main(){
-        tvFeatured = findViewById(R.id.tvFeatured)
-        tvPopular = findViewById(R.id.tvPopular)
-        tvRecommended = findViewById(R.id.tvRecommended)
-
-        tvFeatured.setOnClickListener{
-            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
-            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
-            tvFeatured.setTextColor(clicked)
-            tvPopular.setTextColor(unclicked)
-            tvRecommended.setTextColor(unclicked)
-        }
-        tvPopular.setOnClickListener{
-            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
-            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
-            tvFeatured.setTextColor(unclicked)
-            tvPopular.setTextColor(clicked)
-            tvRecommended.setTextColor(unclicked)
-        }
-        tvRecommended.setOnClickListener{
-            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
-            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
-            tvFeatured.setTextColor(unclicked)
-            tvPopular.setTextColor(unclicked)
-            tvRecommended.setTextColor(clicked)
-        }
+//        tvFeatured = findViewById(R.id.tvFeatured)
+//        tvPopular = findViewById(R.id.tvPopular)
+//        tvRecommended = findViewById(R.id.tvRecommended)
+//
+//        tvFeatured.setOnClickListener{
+//            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
+//            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
+//            tvFeatured.setTextColor(clicked)
+//            tvPopular.setTextColor(unclicked)
+//            tvRecommended.setTextColor(unclicked)
+//        }
+//        tvPopular.setOnClickListener{
+//            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
+//            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
+//            tvFeatured.setTextColor(unclicked)
+//            tvPopular.setTextColor(clicked)
+//            tvRecommended.setTextColor(unclicked)
+//        }
+//        tvRecommended.setOnClickListener{
+//            val clicked = MaterialColors.getColor(tvFeatured!!, R.attr.redElements)
+//            val unclicked =  MaterialColors.getColor(tvFeatured!!, R.attr.text)
+//            tvFeatured.setTextColor(unclicked)
+//            tvPopular.setTextColor(unclicked)
+//            tvRecommended.setTextColor(clicked)
+//        }
 
 
     }

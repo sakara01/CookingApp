@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="redElements" format="color"/>
+    <attr name="buttonBackground" format="color"/>
+    <attr name="appBackground" format="color"/>
+    <attr name="prepBackground" format="color"/>
+    <attr name="text" format="color"/>
+    <attr name="cardButtonBack" format="color"/>
+    <attr name="micOnClick" format="color"/>
+    <attr name="frameColor" format="color"/>
+
+</resources>

@@ -209,12 +209,12 @@ class PrepActivity : AppCompatActivity() {
         stepListView= findViewById(R.id.stepsList)
         //create list view and list items
         val values = mutableListOf<String>(
-            "Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes.",
-            "Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste.",
-            "Bring to a boil and cook for 5 minutes.",
-            "Remove from the heat and add the chopped basil.",
-            "Drain the pasta and add it to the sauce.",
-            "Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",
+            "Cube your plantain, fry and set aside.",
+            "Chop your vegetables into your salad bowl and toss",
+            "In a pan, heat up vegetable oil and stir fry your shrimps and season. Allow to cool",
+            "Toss in your plantain and shrimps once cool into your bowl of vegetables",
+            "Sprinkle the parmesan cheese over the salad",
+            "Drizzle your dressing over and serve cool",
             "placeholder(important dont delete)",
             "placeholder(important dont delete)",
             "placeholder(important dont delete)",

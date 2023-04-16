@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    android:text="3 lorem ipsum"
+                    android:text="2 cup vegetables"
                     android:textAlignment="center"
                     android:textColor="?attr/redElements" />
 
@@ -71,7 +71,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    android:text="1/4 cup dolor"
+                    android:text="1 plantain"
                     android:textAlignment="center"
                     android:textColor="?attr/redElements" />
 
@@ -82,7 +82,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_regular"
                     android:letterSpacing="-0.03"
-                    android:text="2/3 tsp amet"
+                    android:text="1 cup parmesan cheese"
                     android:textAlignment="center"
                     android:textColor="?attr/redElements" />
 

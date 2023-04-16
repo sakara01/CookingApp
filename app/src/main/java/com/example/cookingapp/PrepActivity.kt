@@ -215,10 +215,8 @@ class PrepActivity : AppCompatActivity() {
             "Toss in your plantain and shrimps once cool into your bowl of vegetables",
             "Sprinkle the parmesan cheese over the salad",
             "Drizzle your dressing over and serve cool",
-            "placeholder(important dont delete)",
-            "placeholder(important dont delete)",
-            "placeholder(important dont delete)",
-            "placeholder(important dont delete)")
+            "Done!",
+            " ")
         val adapter = ArrayAdapter<String>(this, R.layout.step_item, R.id.tvInstruction, values)
         stepListView.adapter= adapter
     }

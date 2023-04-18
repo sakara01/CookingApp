@@ -12,6 +12,7 @@ import android.speech.RecognizerIntent.EXTRA_RESULTS
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,9 @@ class PrepActivity : AppCompatActivity() {
     //private lateinit var btnTest2 : Button
     private var position : Int = 0
     private var maxPosition : Int = 0
+    private lateinit var imgArrow : ImageView
+    private lateinit var tipsCard : CardView
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +49,7 @@ class PrepActivity : AppCompatActivity() {
 
         //use num of instructions for max position and previous position
         position = 0
-        maxPosition = 9
+        maxPosition = 6  //default value to prevent errors
 
         if (ContextCompat.checkSelfPermission
                 (this, RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
@@ -57,8 +61,8 @@ class PrepActivity : AppCompatActivity() {
         micBtn = findViewById(R.id.buttons)
         voiceInput = findViewById(R.id.tvVoice)
         btnPrepBack = findViewById(R.id.btnPrepBack)
-        //btnTest = findViewById(R.id.btnTest)       no longer needed, just for testing
-        //btnTest2 = findViewById(R.id.btnTest2)
+        imgArrow = findViewById(R.id.imgArrow)
+        tipsCard = findViewById(R.id.tipHolder)
 
         createSteps()
 
@@ -75,6 +79,8 @@ class PrepActivity : AppCompatActivity() {
                     startVoice()
                     btnClicked = true
                     //Log.d("myTag","btnClicked set to true")
+                    tipsCard.visibility = View.GONE
+                    imgArrow.visibility = View.GONE
                 } else if (btnClicked == true) {
                     //end speech recognition and reset drawable
                     val my_color = MaterialColors.getColor(micBtn!!, R.attr.redElements)
@@ -100,18 +106,6 @@ class PrepActivity : AppCompatActivity() {
             Animatoo.animateSlideRight(this)
 
         }
-
-        /*
-        btnTest.setOnClickListener{
-            nextStep()
-            position +=1
-        }
-
-        btnTest2.setOnClickListener{
-            previousStep()
-            position -=1
-        }
-        */
 
     }
 
@@ -156,7 +150,6 @@ class PrepActivity : AppCompatActivity() {
             }
 
             override fun onError(error: Int) {
-                //Log.d("myTag","my message")
                 speechRecognizer!!.startListening(
                     speechRecognizerIntent
                 )
@@ -215,22 +208,20 @@ class PrepActivity : AppCompatActivity() {
             "Toss in your plantain and shrimps once cool into your bowl of vegetables",
             "Sprinkle the parmesan cheese over the salad",
             "Drizzle your dressing over and serve cool",
-            "Done!",
-            " ")
+            "Enjoy!")
+
+        maxPosition = values.size - 1
+
         val adapter = ArrayAdapter<String>(this, R.layout.step_item, R.id.tvInstruction, values)
         stepListView.adapter= adapter
+
     }
 
     private fun nextStep(){
-        //current position plus one (to move forward)
-
         if (position ==0 ){
             var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
-
-            //var myText: TextView = stepListView.getChildAt(0).findViewById<TextView>(R.id.tvInstruction)
-            //myText.text = position.toString()
 
             var myNextCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
             myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))

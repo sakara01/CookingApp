@@ -16,6 +16,7 @@
         android:layout_height="300dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
+        android:translationZ="2dp"
         android:layout_marginTop="-14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +157,7 @@
         android:background="@drawable/roundedbutton"
         android:backgroundTint="?attr/cardButtonBack"
         android:elevation="2dp"
-        android:translationZ="2dp"
+        android:translationZ="4dp"
         android:src="@android:drawable/ic_btn_speak_now"
         app:tint="?attr/redElements"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -171,11 +172,12 @@
         android:layout_height="490dp"
         android:divider="@null"
         android:background="?attr/prepBackground"
-        android:translationZ="0dp"
+        android:translationZ="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:listitem="@layout/step_item"/>
 
     <!--
     <Button
@@ -202,6 +204,91 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tipHolder"
+        android:layout_width="290dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border"
+            >
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:text="Tips:"
+                android:fontFamily="monospace"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:text="Say 'next' for the next step"
+                app:layout_constraintTop_toBottomOf="@id/tips"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:text="Say 'previous' for the previous step"
+                app:layout_constraintTop_toBottomOf="@id/t1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/t3"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:text="Say 'exit' to close the recipe"
+                app:layout_constraintTop_toBottomOf="@id/t2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/arrow_foreground"
+        android:elevation="10dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginStart="150dp"
+        app:layout_constraintTop_toBottomOf="@id/tipHolder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

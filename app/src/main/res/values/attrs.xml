@@ -8,5 +8,6 @@
     <attr name="cardButtonBack" format="color"/>
     <attr name="micOnClick" format="color"/>
     <attr name="frameColor" format="color"/>
+    <attr name="textsGreyed" format="color"/>
 
 </resources>

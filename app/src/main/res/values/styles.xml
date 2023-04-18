@@ -9,6 +9,8 @@
         <item name="cardButtonBack">#FFFFFF</item>
         <item name="micOnClick">#098100</item>
         <item name="frameColor">#F1F1F1</item>
+        <item name="textsGreyed">#272727</item>
+
 
     </style>
 
@@ -21,6 +23,8 @@
         <item name="cardButtonBack">#333333</item>
         <item name="micOnClick">#58ED8A</item>
         <item name="frameColor">#4C4C4C</item>
+        <item name="textsGreyed">#D3D3D3</item>
+
 
 
     </style>

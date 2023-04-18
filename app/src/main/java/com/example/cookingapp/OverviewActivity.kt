@@ -5,15 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.HorizontalScrollView
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.TextClock
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
@@ -44,8 +36,8 @@ class OverviewActivity : AppCompatActivity() {
     private lateinit var btnOverview : ImageButton
     private lateinit var btnOverviewBack : ImageButton
     private lateinit var btnHeart : ImageButton
-    private lateinit var btnIngredientsPlus : ImageButton
-    private lateinit var btnIngredientsMinus : ImageButton
+    private lateinit var btnIngredientsPlus : FrameLayout
+    private lateinit var btnIngredientsMinus : FrameLayout
     private lateinit var servings : TextView
     private lateinit var time : TextView
     private lateinit var numIng : TextView

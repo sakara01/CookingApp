@@ -40,7 +40,6 @@ class PrepActivity : AppCompatActivity() {
     private lateinit var imgArrow : ImageView
     private lateinit var tipsCard : CardView
 
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,7 +152,6 @@ class PrepActivity : AppCompatActivity() {
                 speechRecognizer!!.startListening(
                     speechRecognizerIntent
                 )
-                voiceInput!!.setText("couldn't understand, try again")
             }
 
             override fun onResults(bundle: Bundle?) {

@@ -153,6 +153,7 @@ class PrepActivity : AppCompatActivity() {
                 speechRecognizer!!.startListening(
                     speechRecognizerIntent
                 )
+                voiceInput!!.setText("couldn't understand, try again")
             }
 
             override fun onResults(bundle: Bundle?) {
@@ -165,7 +166,7 @@ class PrepActivity : AppCompatActivity() {
                     nextStep()
                     position +=1
 
-                }else if ( "previous" in data!![0] || "Previous" in data!![0]){
+                }else if ( "previous" in data!![0] || "Previous" in data!![0] || "back" in data!![0] || "Back" in data!![0] ){
                     Log.d("myTag", "previous recognized")
                     // Add here to move to next instruction or inside function
                     previousStep()

@@ -162,9 +162,15 @@ class PrepActivity : AppCompatActivity() {
             }
 
             override fun onError(error: Int) {
-                speechRecognizer!!.startListening(
-                    speechRecognizerIntent
-                )
+                if (error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                    // dont do anything if the user didn't say anything within the timeout interval
+                } else if ( error == SpeechRecognizer.ERROR_NO_MATCH ){
+                    voiceInput!!.text = "Couldn't understand, please try again."
+                } else {
+                    println("weird error idk")
+                }
+                speechRecognizer!!.startListening(speechRecognizerIntent)
+
             }
 
             override fun onResults(bundle: Bundle?) {

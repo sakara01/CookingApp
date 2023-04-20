@@ -30,6 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/io.netty.versions.properties'
+    }
+
 }
 
 dependencies {
@@ -46,5 +52,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.github.AtifSayings:Animatoo:1.0.1'
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation 'com.google.cloud:google-cloud-texttospeech:2.3.0'
 
 }

@@ -2,14 +2,16 @@ package com.example.cookingapp
 
 import android.Manifest.permission.RECORD_AUDIO
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
-import android.speech.RecognizerIntent.EXTRA_RESULTS
 import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -39,6 +41,8 @@ class PrepActivity : AppCompatActivity() {
     private var maxPosition : Int = 0
     private lateinit var imgArrow : ImageView
     private lateinit var tipsCard : CardView
+    private lateinit var textToSpeech: TextToSpeech
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +68,13 @@ class PrepActivity : AppCompatActivity() {
         tipsCard = findViewById(R.id.tipHolder)
 
         createSteps()
+
+        textToSpeech = TextToSpeech(this) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+            } else {
+                println("error initializing textToSpeech")
+            }
+        }
 
         micBtn!!.setOnTouchListener { view, motionEvent ->
 
@@ -132,6 +143,8 @@ class PrepActivity : AppCompatActivity() {
 
         speechRecognizer!!.setRecognitionListener(object : RecognitionListener {
             override fun onReadyForSpeech(params: Bundle?) {
+                val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                am.setStreamMute(AudioManager.STREAM_SYSTEM, true)
             }
 
             override fun onBeginningOfSpeech() {
@@ -221,6 +234,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             var myNextCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
             myNextCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.prepBackground))
@@ -236,6 +250,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(position).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(position).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -253,6 +268,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(position).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(position).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -271,6 +287,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(2).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -331,6 +348,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(0).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -348,6 +366,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(1).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -366,6 +385,7 @@ class PrepActivity : AppCompatActivity() {
             var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
             myCard.setCardBackgroundColor(MaterialColors.getColor(stepListView!!, R.attr.cardButtonBack))
             focusCard(myCard)
+            readAloud(myCard)
 
             //var myText: TextView = stepListView.getChildAt(2).findViewById<TextView>(R.id.tvInstruction)
             //myText.text = position.toString()
@@ -385,9 +405,16 @@ class PrepActivity : AppCompatActivity() {
         if (btnClicked == true) {
             speechRecognizer!!.destroy()
         }
+        textToSpeech.shutdown()
         finish()
         Animatoo.animateSlideRight(this)
 
+    }
+
+    private fun readAloud(myCard: CardView){
+        println("should read aloud")
+        var text = myCard.findViewById<TextView>(R.id.tvInstruction)
+        textToSpeech.speak(text.text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     override fun onRequestPermissionsResult(

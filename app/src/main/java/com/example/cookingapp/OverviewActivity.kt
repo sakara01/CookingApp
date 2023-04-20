@@ -82,7 +82,7 @@ class OverviewActivity : AppCompatActivity() {
 
         btnOverview.setOnClickListener{
             val intent = Intent(this,PrepActivity::class.java)
-            //this is the current activity, and PrepActivity is the one we want to navigate to
+            intent.putExtra("id", id.toString())
             startActivity(intent)
             Animatoo.animateSlideLeft(this)
         }

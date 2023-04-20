@@ -24,6 +24,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.google.android.material.color.MaterialColors
+import com.example.cookingapp.Listeners.RecipeDetailsListener
+import com.example.cookingapp.Models.RecipeDetailsResponse
+import com.squareup.picasso.Picasso
 import java.util.*
 
 
@@ -42,7 +45,10 @@ class PrepActivity : AppCompatActivity() {
     private lateinit var imgArrow : ImageView
     private lateinit var tipsCard : CardView
     private lateinit var textToSpeech: TextToSpeech
-
+    var id: Int = 0
+    lateinit var manager : RequestManager
+    private var values : MutableList<String> = arrayListOf()
+    private lateinit var adapter: ArrayAdapter<String>
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,8 +72,11 @@ class PrepActivity : AppCompatActivity() {
         btnPrepBack = findViewById(R.id.btnPrepBack)
         imgArrow = findViewById(R.id.imgArrow)
         tipsCard = findViewById(R.id.tipHolder)
+        stepListView= findViewById(R.id.stepsList)
 
-        createSteps()
+        id = intent.extras?.getString("id").toString().toInt()
+        manager = RequestManager(this)
+        manager.getRecipeDetails(recipeDetailsListener, id)
 
         textToSpeech = TextToSpeech(this) { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -117,6 +126,39 @@ class PrepActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private val recipeDetailsListener = object : RecipeDetailsListener {
+        override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
+            if (response != null) {
+                var instStr = response.instructions.toString()
+                var instArray: List<String>
+                if ("<ol>" in instStr || "<li>" in instStr) {
+                    var instStr = instStr.replace(Regex("<(/?ol|li)>"), "")
+                    instArray = instStr.split("</li>")
+                }else{
+                    instArray = instStr.split(".", ". ")
+                }
+                println(response.instructions)
+                for (i in instArray.indices){
+                    var temp = instArray[i]
+                    if (temp != "" && temp != " "){
+                        values.add(temp)
+                    }
+                }
+                println("values in didFetch:")
+                println(values)
+                maxPosition = values.size - 1
+                adapter = ArrayAdapter(this@PrepActivity, R.layout.step_item, R.id.tvInstruction, values)
+                stepListView.adapter= adapter
+            }
+            else {
+                println("response is null")
+            }
+        }
+        override fun didError(message: String?) {
+            Toast.makeText(this@PrepActivity, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -216,24 +258,6 @@ class PrepActivity : AppCompatActivity() {
         )
     }
 
-    private fun createSteps() {
-        stepListView= findViewById(R.id.stepsList)
-        //create list view and list items
-        val values = mutableListOf<String>(
-            "Cube your plantain, fry and set aside.",
-            "Chop your vegetables into your salad bowl and toss",
-            "In a pan, heat up vegetable oil and stir fry your shrimps and season. Allow to cool",
-            "Toss in your plantain and shrimps once cool into your bowl of vegetables",
-            "Sprinkle the parmesan cheese over the salad",
-            "Drizzle your dressing over and serve cool",
-            "Enjoy!")
-
-        maxPosition = values.size - 1
-
-        val adapter = ArrayAdapter<String>(this, R.layout.step_item, R.id.tvInstruction, values)
-        stepListView.adapter= adapter
-
-    }
 
     private fun nextStep(){
         if (position ==0 ){

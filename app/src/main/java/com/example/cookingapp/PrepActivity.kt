@@ -22,6 +22,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.text.isDigitsOnly
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.google.android.material.color.MaterialColors
 import com.example.cookingapp.Listeners.RecipeDetailsListener
@@ -133,15 +134,31 @@ class PrepActivity : AppCompatActivity() {
             if (response != null) {
                 var instStr = response.instructions.toString()
                 var instArray: List<String>
-                if ("<ol>" in instStr || "<li>" in instStr) {
-                    var instStr = instStr.replace(Regex("<(/?ol|li)>"), "")
-                    instArray = instStr.split("</li>")
-                }else{
-                    instArray = instStr.split(".", ". ")
+                var instArrayCorrect: MutableList<String> = arrayListOf()
+
+                println("instStr untouched")
+                println(instStr)
+
+                instStr = instStr.replace(Regex("<(/?ol|li)>"), "")
+                instStr = instStr.replace(Regex("<(/?span|/?div)>?"), "")
+                if ("class" in instStr || "style" in instStr) {
+                    instStr = instStr.replace(Regex("""\s+class="[^"]*"""", RegexOption.IGNORE_CASE), "")
+                    instStr = instStr.replace(Regex("""\s+style="[^"]*"""", RegexOption.IGNORE_CASE), "")
                 }
-                println(response.instructions)
-                for (i in instArray.indices){
-                    var temp = instArray[i]
+
+                instArray = instStr.split("</li>")
+                for (i in instArray.indices) {
+                    var temporary = instArray[i].replace(Regex(">", RegexOption.IGNORE_CASE), " ")
+                    var tempList = temporary.split(".", ". ","! ", "!", "\n")
+                    for (i in tempList.indices) {
+                        if (!tempList[i].matches("\\s*".toRegex())  && !tempList[i].isDigitsOnly()){
+                            instArrayCorrect.add(tempList[i])
+                        }
+                    }
+                }
+
+                for (i in instArrayCorrect.indices){
+                    var temp = instArrayCorrect[i]
                     if (temp != "" && temp != " "){
                         values.add(temp)
                     }

@@ -13,16 +13,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="5dp"
-            android:fontFamily="@font/inter_regular"
+            android:fontFamily="monospace"
             android:text="Hi"
             android:textColor="?attr/text"
             android:textFontWeight="400"
@@ -32,12 +33,13 @@
             android:id="@+id/person_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="40dp"
+            android:fontFamily="monospace"
             android:text="John Doe,"
             android:textColor="?attr/text"
             android:textFontWeight="600"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -45,22 +47,24 @@
         android:id="@+id/recipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/inter_bold"
+
+        android:fontFamily="monospace"
         android:progressTint="?attr/text"
         android:text="What will today's recipe be?"
         android:textAlignment="center"
         android:textColor="?attr/text"
         android:textFontWeight="600"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_container" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.92"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         app:cardBackgroundColor="@color/white"
@@ -81,31 +85,29 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_random"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipes_text" />
+        app:layout_constraintTop_toBottomOf="@+id/recipes_text"
+        app:layout_constraintWidth_percent="0.95"
+        tools:listitem="@layout/list_random_recipe" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="450dp"
-        android:layout_height="70dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
-
-    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/recipes_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="monospace"
         android:text="Popular Recipes"
         android:textColor="?attr/text"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
@@ -204,10 +205,12 @@ class PrepActivity : AppCompatActivity() {
             override fun onReadyForSpeech(params: Bundle?) {
                 val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 am.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+                Handler().postDelayed({
+                    voiceInput!!.text = "Listening..."
+                }, 800) // Delay in milliseconds
             }
 
             override fun onBeginningOfSpeech() {
-                voiceInput!!.text="Listening..."
             }
 
             override fun onRmsChanged(rmsdB: Float) {

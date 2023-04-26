@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import com.squareup.picasso.Transformation;
 
+/**
+ * Creates a cirlce mask for a rectangular image to sit in
+ */
 public class CircleTransform implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {

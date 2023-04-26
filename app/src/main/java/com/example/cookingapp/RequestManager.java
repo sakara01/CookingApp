@@ -18,9 +18,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-
+/**
+ * Handles requests made
+ */
 public class RequestManager {
     Context context;
+    /**
+     * Spoonacular api
+     */
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.spoonacular.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -30,6 +35,9 @@ public class RequestManager {
         this.context = context;
     }
 
+    /**
+     * Calls spoonacular to get 10 random recipes
+     */
     public void getRandomRecipes(RandomRecipeResponseListener listener){
         CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
         Call<RandomRecipesApiResponse> call = callRandomRecipes.callRandomRecipe(context.getString(R.string.api_key), "10");
@@ -51,6 +59,9 @@ public class RequestManager {
         });
     }
 
+    /**
+     * Calls spoonacular to get 10 random recipes given the user searched terms
+     */
     public void getRandomRecipes(RandomRecipeResponseListener listener, List<String> tags){
         CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
         Call<RandomRecipesApiResponse> call = callRandomRecipes.callRandomRecipe(context.getString(R.string.api_key), "10", tags);
@@ -72,6 +83,9 @@ public class RequestManager {
         });
     }
 
+    /**
+     * Gets the specific resipe details
+     */
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         CallRecipeDetails callRecipeDetails = retrofit.create(CallRecipeDetails.class);
         Call<RecipeDetailsResponse> call = callRecipeDetails.callRecipeDetails(id, context.getString(R.string.api_key));
@@ -92,6 +106,9 @@ public class RequestManager {
         });
     }
 
+    /**
+     * Specific random recipe spoonacular api endpoint and handler
+     */
     private interface CallRandomRecipes {
         @GET("recipes/random")
         Call<RandomRecipesApiResponse> callRandomRecipe(
@@ -107,6 +124,9 @@ public class RequestManager {
         );
     }
 
+    /**
+     * Specific recipe details spoonacular api endpoint and handler
+     */
     private interface CallRecipeDetails{
         @GET("recipes/{id}/information")
         Call<RecipeDetailsResponse> callRecipeDetails(

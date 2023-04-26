@@ -32,12 +32,30 @@ import com.squareup.picasso.Picasso
 import java.util.*
 
 
+/**
+ * Represents the preperation activity when the user starts a recipe
+ */
 class PrepActivity : AppCompatActivity() {
 
+    /**
+     * Speech recpgnizer
+     */
     private var speechRecognizer: SpeechRecognizer? = null
+    /**
+     * Voice transcript
+     */
     private var voiceInput : TextView? = null
+    /**
+     * Microphone on/off button
+     */
     private var micBtn : ImageButton? = null
+    /**
+     * Frontend Instruction List
+     */
     private lateinit var stepListView : ListView
+    /**
+     * Back Button
+     */
     private lateinit var btnPrepBack : ImageButton
     private var btnClicked: Boolean =false
     //private lateinit var btnTest : Button      no longer needed, just for testing
@@ -46,12 +64,20 @@ class PrepActivity : AppCompatActivity() {
     private var maxPosition : Int = 0
     private lateinit var imgArrow : ImageView
     private lateinit var tipsCard : CardView
+    /**
+     * Text to speech
+     */
     private lateinit var textToSpeech: TextToSpeech
     var id: Int = 0
     lateinit var manager : RequestManager
     private var values : MutableList<String> = arrayListOf()
     private lateinit var adapter: ArrayAdapter<String>
 
+    /**
+     * On create lifecycle hook
+     *
+     * Initializes the theme, speech recognizer, and frontend variables
+     */
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,6 +156,9 @@ class PrepActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Gathers the instructions for a specific recipe
+     */
     private val recipeDetailsListener = object : RecipeDetailsListener {
         override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
             if (response != null) {
@@ -180,6 +209,9 @@ class PrepActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Checks that the user has record audio permission set to true
+     */
     private fun checkPermissions() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             ActivityCompat.requestPermissions(
@@ -189,6 +221,9 @@ class PrepActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Use the android voice recognizer to get the users voice
+     */
     private fun startVoice(){
         voiceInput = findViewById(R.id.tvVoice)
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
@@ -235,6 +270,9 @@ class PrepActivity : AppCompatActivity() {
 
             }
 
+            /**
+             * Takes the voice transcript and maps it onto a command in the system if there is a match found
+             */
             override fun onResults(bundle: Bundle?) {
                 //micBtn!!.setImageResource(R.drawable.ic_v_off)
                 val data = bundle!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
@@ -278,7 +316,11 @@ class PrepActivity : AppCompatActivity() {
         )
     }
 
-
+    /**
+     * Represents the next step command
+     *
+     * Traverses to the next instruction in the frontend
+     */
     private fun nextStep(){
         if (position ==0 ){
             var myCard: CardView = stepListView.getChildAt(0).findViewById<CardView>(R.id.stepCardView)
@@ -354,6 +396,9 @@ class PrepActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Represents the current step/instruction by changing the card to a lighter color
+     */
     private fun focusCard(myCard : CardView) {
         val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
         params.width = 900
@@ -373,6 +418,9 @@ class PrepActivity : AppCompatActivity() {
         instText.setTextSize(17F)
     }
 
+    /**
+     * Represents the the inactive steps/instructions
+     */
     private fun defocusCard(myCard: CardView){
         val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
         params.width = 740
@@ -392,6 +440,11 @@ class PrepActivity : AppCompatActivity() {
         instText.setTextSize(14F)
     }
 
+    /**
+     * Represents the previous step command
+     *
+     * Traverses to the previous instruction in the frontend
+     */
     private fun previousStep(){
 
         if (position ==0 ){
@@ -451,6 +504,9 @@ class PrepActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Handles when the user clicked the back button to go back to the recipe overview page
+     */
     private fun exitRecipe(){
         if (btnClicked == true) {
             speechRecognizer!!.destroy()
@@ -461,12 +517,18 @@ class PrepActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Reads the current instruction out loud
+     */
     private fun readAloud(myCard: CardView){
         println("should read aloud")
         var text = myCard.findViewById<TextView>(R.id.tvInstruction)
         textToSpeech.speak(text.text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
+    /**
+     * Requests the user to set record audio permission
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

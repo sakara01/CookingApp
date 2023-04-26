@@ -16,20 +16,48 @@ import org.w3c.dom.Text
 import com.squareup.picasso.Picasso;
 import com.example.cookingapp.CircleTransform
 
+/**
+ * Represents the recipe overview page when a recipe is clicked into
+ */
 class OverviewActivity : AppCompatActivity() {
+    /**
+     * Recipe ID Number
+     */
     var id: Int = 0
+    /**
+     * Recipe Title
+     */
     lateinit var recipeTitle : TextView
+    /**
+     * Author of the Recipe
+     */
     lateinit var author : TextView
+    /**
+     * Length of time the recipe takes to make
+     */
     lateinit var tvTime : TextView
+    /**
+     * Amount of servings the recipe is made for
+     */
     lateinit var tvServings : TextView
+    /**
+     * Length of ingredients
+     */
     lateinit var tvIngredientCount : TextView
+    /**
+     * Thumbnail image of the recipe
+     */
     lateinit var recipeImage : ImageView
-    lateinit var recycler_recipe_ingredients : RecyclerView
-    // lateinit var recycler_recipe_appliances: RecyclerView
     lateinit var manager : RequestManager
-    //lateinit var appliancesAdapter: AppliancesAdapter
 
+    /**
+     * Visual list of the ingredients
+     */
     private lateinit var ingredientListView : ListView
+
+    /**
+     * Array holding the ingredients
+     */
     val ingredients: MutableList<String> = ArrayList()
     private var arrayAdapter: ArrayAdapter<String> ?=null
 
@@ -38,11 +66,13 @@ class OverviewActivity : AppCompatActivity() {
     private lateinit var btnHeart : ImageButton
     private lateinit var btnIngredientsPlus : FrameLayout
     private lateinit var btnIngredientsMinus : FrameLayout
-    private lateinit var servings : TextView
-    private lateinit var time : TextView
-    private lateinit var numIng : TextView
-    private var servingsCounter : Int = 0
 
+    /**
+     * On create lifecycle hook
+     *
+     * We set all the recipe information into the frontend and
+     * initialize each element to listen for on element clicked
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Light)
@@ -109,6 +139,9 @@ class OverviewActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * A quick method for assigning frontend objects to their corresponding variables
+     */
     private fun findViews() {
         recipeTitle = findViewById(R.id.recipeTitle)
         author = findViewById(R.id.author)
@@ -122,6 +155,9 @@ class OverviewActivity : AppCompatActivity() {
         //recycler_recipe_appliances = findViewById(R.id.recycler_recipe_appliances)
    }
 
+    /**
+     * Fetches the recipe information
+     */
    private val recipeDetailsListener = object : RecipeDetailsListener {
        override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
            if (response != null) {

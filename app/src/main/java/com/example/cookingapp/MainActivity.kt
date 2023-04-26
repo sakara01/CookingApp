@@ -24,20 +24,34 @@ import com.google.android.material.color.MaterialColors
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * Represents the main activity when the app first loads
+ */
 class MainActivity : AppCompatActivity() {
+    /**
+     * Search bar dialogue
+     */
     lateinit var dialog: ProgressDialog
+    /**
+     * Item that you can make api calls through
+     */
     lateinit var manager: RequestManager
+    /**
+     * Adapter that allows us to make api calls to Spoonacular
+     */
     lateinit var randomRecipeAdapter: RandomRecipeAdapter
+    /**
+     *
+     */
     lateinit var recyclerView: RecyclerView
 
-    private lateinit var btnPrep: Button
-    private lateinit var btnOverview: Button
-    private lateinit var btnTheme: Button
-    private var currentTheme: Int =0
-    private lateinit var tvFeatured : TextView
-    private lateinit var tvPopular : TextView
-    private lateinit var tvRecommended : TextView
+    /**
+     * The search bar on the main page
+     */
     private lateinit var searchMic : ImageView
+    /**
+     * Holds the speech recognizer
+     */
     private lateinit var speechRecognizer : SpeechRecognizer
 
     val tags: MutableList<String> = ArrayList()
@@ -45,6 +59,11 @@ class MainActivity : AppCompatActivity() {
 
     private val REQUEST_CODE_SPEECH_INPUT = 1234
 
+    /**
+     * Function called during the create lifecycle hook
+     *
+     * We initialize all variables here including theme, search bar, speech, and random recipes
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Light)
@@ -99,6 +118,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * onActivity lifecycle hook
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -109,6 +131,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fetches the data for the random recipes to be filled on the main activity
+     */
     private val randomRecipeResponseListener = object : RandomRecipeResponseListener {
         override fun didFetch(response: RandomRecipesApiResponse, message: String) {
             recyclerView = findViewById(R.id.recycler_random)
@@ -123,6 +148,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Listens for when a specific recipe is clicked into on the main page
+     */
     private val recipeClickListener = object : RecipeClickListener {
         override fun onRecipeClicked(id: String) {
             startActivity(Intent(this@MainActivity, OverviewActivity::class.java)

@@ -37,6 +37,11 @@ public class RequestManager {
 
     /**
      * Calls spoonacular to get 10 random recipes
+     *
+     * @param listener Retrieves the fetch response and error response of the api call
+     * @return void
+     * @see RequestManager
+     * @see RandomRecipeResponseListener
      */
     public void getRandomRecipes(RandomRecipeResponseListener listener){
         CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
@@ -61,6 +66,14 @@ public class RequestManager {
 
     /**
      * Calls spoonacular to get 10 random recipes given the user searched terms
+     *
+     * @param  listener Retrieves the fetch response and error response of the api call
+     * @param tags A list of String values from the search bar
+     *
+     * @return void
+     * @see RequestManager
+     * @see RandomRecipeResponseListener
+     *
      */
     public void getRandomRecipes(RandomRecipeResponseListener listener, List<String> tags){
         CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
@@ -84,7 +97,12 @@ public class RequestManager {
     }
 
     /**
-     * Gets the specific resipe details
+     * Gets the specific recipe details
+     *
+     * @param listener Retrieves the fetch response and error response of the api call
+     * @param id The specific recipe id to fetch more details
+     * @return void
+     * @see RecipeDetailsListener
      */
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         CallRecipeDetails callRecipeDetails = retrofit.create(CallRecipeDetails.class);
@@ -108,6 +126,8 @@ public class RequestManager {
 
     /**
      * Specific random recipe spoonacular api endpoint and handler
+     *
+     * @see CallRandomRecipes
      */
     private interface CallRandomRecipes {
         @GET("recipes/random")
@@ -126,6 +146,8 @@ public class RequestManager {
 
     /**
      * Specific recipe details spoonacular api endpoint and handler
+     *
+     * @see CallRecipeDetails
      */
     private interface CallRecipeDetails{
         @GET("recipes/{id}/information")

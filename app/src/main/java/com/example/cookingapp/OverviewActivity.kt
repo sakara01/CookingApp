@@ -72,6 +72,9 @@ class OverviewActivity : AppCompatActivity() {
      *
      * We set all the recipe information into the frontend and
      * initialize each element to listen for on element clicked
+     *
+     * @param savedInstanceState
+     * @see OverviewActivity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +144,8 @@ class OverviewActivity : AppCompatActivity() {
 
     /**
      * A quick method for assigning frontend objects to their corresponding variables
+     *
+     * @see findViewById
      */
     private fun findViews() {
         recipeTitle = findViewById(R.id.recipeTitle)
@@ -157,8 +162,17 @@ class OverviewActivity : AppCompatActivity() {
 
     /**
      * Fetches the recipe information
+     *
+     * @see RecipeDetailsListener
      */
    private val recipeDetailsListener = object : RecipeDetailsListener {
+        /**
+         * Fetches the recipe information
+         *
+         * @param response The response
+         * @param message The response message
+         * @see RecipeDetailsListener
+         */
        override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
            if (response != null) {
                recipeTitle.text = response.title
@@ -192,6 +206,13 @@ class OverviewActivity : AppCompatActivity() {
                tvIngredientCount.text = ""
            }
        }
+        /**
+         * Error in the request
+         *
+         * @param message The error message
+         * @see RecipeDetailsListener
+         * @see Toast
+         */
        override fun didError(message: String?) {
            Toast.makeText(this@OverviewActivity, message, Toast.LENGTH_SHORT).show()
        }

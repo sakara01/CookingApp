@@ -77,6 +77,7 @@ class PrepActivity : AppCompatActivity() {
      * On create lifecycle hook
      *
      * Initializes the theme, speech recognizer, and frontend variables
+     *
      */
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -158,8 +159,17 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Gathers the instructions for a specific recipe
+     *
+     * @see RecipeDetailsListener
      */
     private val recipeDetailsListener = object : RecipeDetailsListener {
+        /**
+         * Gathers the instructions for a specific recipe
+         *
+         * @param response Response from the spoonacular api call
+         * @param message
+         * @see RecipeDetailsResponse
+         */
         override fun didFetch(response: RecipeDetailsResponse?, message: String?) {
             if (response != null) {
                 var instStr = response.instructions.toString()
@@ -203,6 +213,13 @@ class PrepActivity : AppCompatActivity() {
                 println("response is null")
             }
         }
+        /**
+         * Error in the request
+         *
+         * @param message The error message
+         * @see RecipeDetailsListener
+         * @see Toast
+         */
         override fun didError(message: String?) {
             Toast.makeText(this@PrepActivity, message, Toast.LENGTH_SHORT).show()
         }
@@ -211,6 +228,8 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Checks that the user has record audio permission set to true
+     *
+     * @see ActivityCompat.requestPermissions
      */
     private fun checkPermissions() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -223,6 +242,9 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Use the android voice recognizer to get the users voice
+     *
+     * @see Intent
+     * @see SpeechRecognizer
      */
     private fun startVoice(){
         voiceInput = findViewById(R.id.tvVoice)
@@ -272,6 +294,10 @@ class PrepActivity : AppCompatActivity() {
 
             /**
              * Takes the voice transcript and maps it onto a command in the system if there is a match found
+             *
+             * @param bundle returned speech recognition results
+             * @see SpeechRecognizer
+             * @see Bundle
              */
             override fun onResults(bundle: Bundle?) {
                 //micBtn!!.setImageResource(R.drawable.ic_v_off)
@@ -320,6 +346,10 @@ class PrepActivity : AppCompatActivity() {
      * Represents the next step command
      *
      * Traverses to the next instruction in the frontend
+     *
+     * @see CardView
+     * @see focusCard
+     * @see readAloud
      */
     private fun nextStep(){
         if (position ==0 ){
@@ -398,6 +428,9 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Represents the current step/instruction by changing the card to a lighter color
+     *
+     * @param myCard the current card in the frontend to be focused
+     * @see CardView
      */
     private fun focusCard(myCard : CardView) {
         val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
@@ -420,6 +453,8 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Represents the the inactive steps/instructions
+     * @param myCard the current card in the frontend to be defocused
+     * @see CardView
      */
     private fun defocusCard(myCard: CardView){
         val params: ViewGroup.LayoutParams = myCard.getLayoutParams()
@@ -444,6 +479,10 @@ class PrepActivity : AppCompatActivity() {
      * Represents the previous step command
      *
      * Traverses to the previous instruction in the frontend
+     *
+     * @see CardView
+     * @see focusCard
+     * @see readAloud
      */
     private fun previousStep(){
 
@@ -506,6 +545,8 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Handles when the user clicked the back button to go back to the recipe overview page
+     *
+     * @see Animatoo.animateSlideRight
      */
     private fun exitRecipe(){
         if (btnClicked == true) {
@@ -519,6 +560,9 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Reads the current instruction out loud
+     *
+     * @param myCard The current active card
+     * @see TextToSpeech
      */
     private fun readAloud(myCard: CardView){
         println("should read aloud")
@@ -528,6 +572,10 @@ class PrepActivity : AppCompatActivity() {
 
     /**
      * Requests the user to set record audio permission
+     *
+     * @param requestCode The android request code
+     * @param permissions Current permissions
+     * @param grantResults Results from user
      */
     override fun onRequestPermissionsResult(
         requestCode: Int,

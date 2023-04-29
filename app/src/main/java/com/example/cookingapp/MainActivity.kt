@@ -19,6 +19,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.cookingapp.Adapters.RandomRecipeAdapter
 import com.example.cookingapp.Listeners.RandomRecipeResponseListener
 import com.example.cookingapp.Listeners.RecipeClickListener
+import com.example.cookingapp.Listeners.RecipeDetailsListener
 import com.example.cookingapp.Models.RandomRecipesApiResponse
 import com.google.android.material.color.MaterialColors
 import java.util.*
@@ -63,6 +64,9 @@ class MainActivity : AppCompatActivity() {
      * Function called during the create lifecycle hook
      *
      * We initialize all variables here including theme, search bar, speech, and random recipes
+     *
+     * @param savedInstanceState
+     * @see MainActivity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +124,11 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * onActivity lifecycle hook
+     *
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -133,8 +142,17 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Fetches the data for the random recipes to be filled on the main activity
+     *
+     * @see RandomRecipeResponseListener
      */
     private val randomRecipeResponseListener = object : RandomRecipeResponseListener {
+        /**
+         * Fetches the data for the random recipes to be filled on the main activity
+         *
+         * @param response The response
+         * @param message The response message
+         * @see RecipeDetailsListener
+         */
         override fun didFetch(response: RandomRecipesApiResponse, message: String) {
             recyclerView = findViewById(R.id.recycler_random)
             recyclerView.setHasFixedSize(true)
@@ -150,8 +168,16 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Listens for when a specific recipe is clicked into on the main page
+     *
+     * @see RecipeClickListener
      */
     private val recipeClickListener = object : RecipeClickListener {
+        /**
+         * Listens for when a specific recipe is clicked into on the main page
+         *
+         * @param id The id of the recipe clicked
+         * @see RecipeClickListener
+         */
         override fun onRecipeClicked(id: String) {
             startActivity(Intent(this@MainActivity, OverviewActivity::class.java)
                 .putExtra("id", id))

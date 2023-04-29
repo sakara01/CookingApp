@@ -9,6 +9,12 @@ import com.squareup.picasso.Transformation;
  * Creates a cirlce mask for a rectangular image to sit in
  */
 public class CircleTransform implements Transformation {
+    /**
+     * Creates a cirlce mask for a rectangular image to sit in
+     *
+     * @param source The bitmap of the image passed in
+     * @see Bitmap
+     */
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
